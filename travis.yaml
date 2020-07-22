@@ -1,0 +1,8 @@
+before_install:
+    - echo "Before running..."
+    
+script: 
+    - ./run.sh
+    
+after_success:
+    - echo "Successfully ran the script!"
