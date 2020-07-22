@@ -1,0 +1,9 @@
+language: generic
+before_install:
+    - echo "Before running"
+    
+script: 
+    - echo "Running..."
+    
+after_success:
+    - echo "Successfully ran the script!"
