@@ -1,5 +1,6 @@
 import datetime
 import os
+import io
 import errno
 
 
@@ -11,13 +12,13 @@ def banner(message):
 
 
 def log(message):
-    out = writeout(message)
-    # try:
-    #     with open(logfile, "w") as f:
-    #         # f.write(out)
-    #         f.close()
-    # except IOError as e:
-    #     writeout("File does not exist! %s" % e)
+    out = writeout(message) + "\n"
+    try:
+        with io.open(logfile, "a", encoding='utf-8') as f:
+            f.write(out.decode('utf-8'))
+            f.close()
+    except IOError as e:
+        writeout("File does not exist! %s" % e)
 
 
 def writeout(message):

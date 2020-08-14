@@ -9,7 +9,6 @@ class HTMLResumeGenerator:
 
     def generate(self):
         assert isinstance(self.original, dict)
-        timber.banner("beginning generation")
         for item in self.original:
             timber.log(item)
             if type(self.original.get(item)) is list:
@@ -20,4 +19,3 @@ class HTMLResumeGenerator:
                     timber.log("%s%s" % (tabs, elm))
             else:
                 print (self.original.get(item))
-        timber.banner("finished generation")
