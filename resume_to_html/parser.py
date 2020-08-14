@@ -1,4 +1,5 @@
 import htmlstructure
+import timber
 from bs4 import BeautifulSoup
 
 
@@ -17,6 +18,8 @@ class ResumeParser:
         a["href"] = htmlstructure.website_link
         a["class"] = htmlstructure.website_cls
         spans = self.soup.findAll("span")
+        timber.banner("Beginning parsing")
+
         for span in spans:
             indent = '--- '
             text = span.get_text()
@@ -62,8 +65,10 @@ class ResumeParser:
             else:
                 indent = "Unknown element found"
             cls = span["class"]
-            print("%s%s\t{CLASS=\"%s\"}" % (indent, text, cls))
+            timber.log("%s%s\t{CLASS=\"%s\"}" % (indent, text, cls))
+
+        timber.banner("finished parsing")
         return self.resume
 
     def prettify(self):
-        print(self.soup.prettify())
+        timber.log(self.soup.prettify())

@@ -1,6 +1,4 @@
-import htmlstructure
-from bs4 import BeautifulSoup
-
+import timber
 
 class HTMLResumeGenerator:
     original = None
@@ -11,13 +9,15 @@ class HTMLResumeGenerator:
 
     def generate(self):
         assert isinstance(self.original, dict)
+        timber.banner("beginning generation")
         for item in self.original:
-            print(item)
+            timber.log(item)
             if type(self.original.get(item)) is list:
                 for elm in self.original.get(item):
                     tabs = "\t"
                     if elm["class"] == "item":
                         tabs += tabs
-                    print (tabs + str(elm))
+                    timber.log("%s%s" % (tabs, elm))
             else:
                 print (self.original.get(item))
+        timber.banner("finished generation")

@@ -10,9 +10,9 @@ def parse_resume(filename):
     try:
         with open(filename, "r") as f:
             resume = f.read()
+            f.close()
             parser = ResumeParser(resume)
             parsed_resume = parser.parse()
-            f.close()
         generator = HTMLResumeGenerator(parsed_resume)
         generator.generate()
     except IOError as e:
