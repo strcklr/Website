@@ -1,9 +1,12 @@
+from __future__ import print_function
+
 from parser import ResumeParser
 from generator import HTMLResumeGenerator
+import retriever
 
 
 def main():
-    parse_resume("Strickler_Chase_Resume.html")
+    parse_resume(retriever.get())
 
 
 def parse_resume(filename):
@@ -16,7 +19,8 @@ def parse_resume(filename):
         generator = HTMLResumeGenerator(parsed_resume)
         generator.generate()
     except IOError as e:
-        print "File %s does not exist!" % filename
+        print("File %s does not exist!" % e.filename)
+        raise e
 
 
 main()

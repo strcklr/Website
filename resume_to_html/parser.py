@@ -22,6 +22,7 @@ class ResumeParser:
         for span in spans:
             indent = '--- '
             text = span.get_text()
+            timber.log(span)
             if self.skip or len(text) == 0 or not span.has_attr("class"):
                 self.skip = False
                 continue
