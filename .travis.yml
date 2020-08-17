@@ -1,6 +1,7 @@
 language: generic
 before_install:
     - echo "Before running"
+    - pip install -r resume_to_html/requirements.txt
     
 script: 
     - echo "Running..."
