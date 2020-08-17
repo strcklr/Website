@@ -1,10 +1,12 @@
-language: generic
+language: python
+python:
+    - "2.7"
 before_install:
-    - echo "Before running"
+    - echo "Installing Python Dependencies"
     - pip install -r resume_to_html/requirements.txt
     
 script: 
-    - echo "Running..."
+    - echo "Downloading resume..."
     - python resume_to_html/retriever.py
     
 after_success:
