@@ -13,7 +13,8 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 # The ID of a sample document.
 DOCUMENT_ID = '10ti6boIneCzlgaynLWV8ApedpAOrlFDP67g0tNEks_s'
 
-LOCAL_FILENAME = "resume.html"
+LOCAL_FILENAME_HTML = "resume.html"
+LOCAL_FILENAME_PDF = "resume.pdf"
 
 
 def get():
@@ -41,9 +42,19 @@ def get():
 
     service = build('drive', 'v3', credentials=creds)
 
-    request = service.files().export_media(fileId=DOCUMENT_ID,
+    requesthtml = service.files().export_media(fileId=DOCUMENT_ID,
                                            mimeType="text/html")
 
+    requestpdf = service.files().export_media(fileId=DOCUMENT_ID,
+                                           mimeType="application/pdf")
+
+    download_request(requesthtml, LOCAL_FILENAME_HTML)
+    download_request(requestpdf, LOCAL_FILENAME_PDF)
+
+    return LOCAL_FILENAME_HTML
+
+
+def download_request(request, filename):
     fh = io.BytesIO()
     downloader = MediaIoBaseDownload(fh, request)
     done = False
@@ -51,8 +62,6 @@ def get():
         status, done = downloader.next_chunk()
         print("Download %d%%." % int(status.progress() * 100))
 
-    with open(LOCAL_FILENAME, "wb") as f:
+    with open(filename, "wb") as f:
         f.write(fh.getvalue())
         f.close()
-
-    return LOCAL_FILENAME

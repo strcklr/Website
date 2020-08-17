@@ -4,6 +4,7 @@ before_install:
     
 script: 
     - echo "Running..."
+    - python resume_to_html/retriever.py
     
 after_success:
     - echo "Successfully ran the script!"
